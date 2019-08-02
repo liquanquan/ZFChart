@@ -179,6 +179,15 @@
         BOOL isAllValuesZero = [[ZFMethod shareInstance] isAllValuesZero:self.valueArray];
         if (isAllValuesZero) {
             NSLog(@"当前所有数值为0，无法绘画图表");
+            UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
+            [path stroke];
+            CAShapeLayer *borderLayer = [CAShapeLayer layer];
+            borderLayer.frame = self.bounds;
+            borderLayer.lineWidth = 1.f;
+            borderLayer.fillColor = [UIColor clearColor].CGColor;
+            borderLayer.strokeColor = [UIColor colorWithRed:159.0/255.0 green:159.0/255.0 blue:159.0/255.0 alpha:1.0].CGColor;
+            borderLayer.path = path.CGPath;
+            [self.layer addSublayer:borderLayer];
             return;
         }
     }
